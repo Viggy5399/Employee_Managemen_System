@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Registration Form</title>
-	<style>
-        
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
 *{
     margin: 0;
@@ -182,71 +175,3 @@
       flex-direction: row;
     }
   }
-    </style>
-</head>
-<body>
-
-<div class="wrapper">
-    <div class="title">
-      Registration Form
-    </div>
-    <form action="/register", method ="POST">
-    <div class="form">
-       <div class="inputfield">
-          <label>First Name</label>
-          <input type="text" class="input" name="name">
-       </div>  
-        <div class="inputfield">
-          <label>Employee ID</label>
-          <input type="text" class="input" name="id">
-       </div>  
-       <div class="inputfield">
-          <label>Password</label>
-          <input type="password" class="input" name="password">
-       </div>  
-      <div class="inputfield">
-          <label>Confirm Password</label>
-          <input type="password" class="input" name="confirmpassword">
-       </div> 
-        <div class="inputfield">
-          <label>Gender</label>
-          <div class="custom_select" name="gender">
-            <select>
-              <option value="">Select</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
-       </div> 
-        <div class="inputfield">
-          <label>Email Address</label>
-          <input type="text" class="input" name="email">
-       </div> 
-      <div class="inputfield">
-          <label>Phone Number</label>
-          <input type="text" class="input" name="phonenumber">
-       </div> 
-      <div class="inputfield">
-          <label>Address</label>
-          <textarea class="textarea"></textarea>
-       </div> 
-      <div class="inputfield">
-          <label>Postal Code</label>
-          <input type="text" class="input" name="postal">
-       </div> 
-      <div class="inputfield terms">
-          <label class="check">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <p>Agreed to terms and conditions</p>
-       </div> 
-      <div class="inputfield">
-        <input type="submit" value="Register" class="btn">
-      </div>
-    </div>
-</form>
-</div>	
-	
-</body>
-</html>
