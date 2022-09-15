@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <table border="5" style="width: 100%;" bgcolor="aqua">
+    <tr>
+      {% for header in headings%}
+        <th>{{header}}</th>
+      {%endfor%}
+    </tr>
+    {% for row in data %}
+      {% set value = row[1] %}
+      <tr>
+        {% for cell in row %}
+      
+          <td>{{ cell }}</td>
+      
+        {% endfor %}
+        <td><button><a href = {{ url_for('update' ,id=value) }}>Edit</a></button></td>
+        <td><button><a href = {{ url_for('delete' ,id=value) }}>Delete</a></button></td>
+      </tr>
+
+    {% endfor %}
+
+
+  </table>
+
+</body>
+
+</html>

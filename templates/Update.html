@@ -1,0 +1,19 @@
+<html>
+    <head></head>
+    <body>
+      {% for emp in emps %}
+      <h1>"Viggy"</h1>
+        <form method = "POST" >
+          <p>Employee_name <input type = "text" name = "name"  value="{{ emp["Employee_name" ]}}"></p>
+          <p>Employee_id <input type = "text" name = "employee_id"  value="{{ emp["Employee_id" ]}}"></p>
+          <p>Phone_number <input type = "text" name = "phone" value="{{ emp["Phone_Number"]}}"></p>
+          <p>Designation <input type = "text" name = "job" value="{{ emp["Designation"]}}"></p>
+          <p>Date_of_Joining <input type = "text" name = "dateemployed" value="{{ emp["Date_of_Joining"]}}"></p>
+          <p>Address <input type = "text" name = "resaddress" value="{{ emp["Address"]}}"></p>
+          <p>Location <input type = "text" name = "reslocation" value="{{ emp["Location"]}}"></p>
+          <p><input type = "submit" value = "Submit" ></p>
+        </form>
+        {% endfor %}
+    </body>
+</html>
+

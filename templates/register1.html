@@ -122,22 +122,47 @@ input[type="submit"]:hover{
   </head>
   <body>
     <div class="center">
-      <h1>Login</h1>
-      <form method="POST">
+      <h1>Register</h1>
+      <form method="POST", action="/register">
         <div class="txt_field">
-          <input type="text" required name="id">
+          <input type="text" required name="name">
           <span></span>
-          <label>ID</label>
+          <label>Name</label>
         </div>
+        <div class="txt_field">
+            <input type="text" required name="id">
+            <span></span>
+            <label>Userid</label>
+          </div>
         <div class="txt_field">
           <input type="password" required name="password">
           <span></span>
           <label>Password</label>
         </div>
-        <div class="pass"><a href="{{ url_for('forgotpassword') }}">Forgot Password?</a></div>
-        <input type="submit" value="Login">
+        <div class="txt_field">
+            <input type="password" required name="confirmpassword">
+            <span></span>
+            <label>Confirm Password</label>
+          </div>
+        <input type="submit" value="REGISTER">
         <div class="signup_link">
-          Not a member? <a href="{{ url_for('register') }}">Signup</a>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for category, message in messages %}
+
+                <div class="alert alert-{{ category }}">
+
+                    {{ message }}
+
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
         </div>
       </form>
     </div>
