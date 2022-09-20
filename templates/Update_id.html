@@ -21,17 +21,53 @@
                 .left{
                     float: left;
                 }
+    
+                .input-box{
+                    width: 100%;
+                    height: 79px;
+                    margin-bottom: 15px;
+                }
+                .input-small{
+                    width: 90%;
+                }
+                .left{
+                    float: left ;
+                }
+                .form{
+                    margin: 1rem auto;
+                    background-color: rgb(25, 95, 149);
+                    width: 10%;
+                    display: flex;
+                    flex-direction: column;
+                    padding: 1rem;
+                }
+                .form input{
+                    margin-bottom: 1rem;
+                    padding: 0.5rem;
+                    border: 1px solid white;
+                    border-radius: 5px;
+                }
+                .form label{
+                 color: aliceblue;
+                    margin-bottom: 0.2rem;
+                }
+                input[type="submit"]{
+                    background-color: rgb(151, 178, 213);
+                    border: 1px solid white;
+                }
+                .up{
+                    margin-left: -50rem;
+                }
             </style>
         </head>
     <body>
         <div class="up">
-            <h1>"Viggy"</h1>
-              <form action="update_id" method = "POST" id="f1">
+              <form action="update_id" method = "POST" id="f1" class="form">
                   <div class="input-box input-small left">
                       <label for="employee_id">Employee_id</label><br>
                       <input type = "integer" name = "ID" placeholder="ID" value="">
-                      <button>Submit</button>
-                  </div>
+                      <input type = "submit" id="submit-btn" value = "Submit" >
+                  </div> 
               </form>
           </div>
 

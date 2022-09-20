@@ -6,65 +6,15 @@
 			<p>Employee Management System</p>
 		</div>
 		<ul class="nav">
-			<li class="nav-item"><a href="{{url_for('employeelist')}}"><span class="nav-icon"><i class="fa fa-users"></i></span>All Employees</a></li>
-			<li class="nav-item"><a href="{{url_for('update_id')}}"><span class="nav-icon"><i class="fa fa-check"></i></span>Update Employess</a></li>
-			
-			<li class="nav-item current"><a href="{{ url_for('addemployee') }}"><span class="nav-icon"><i class="fa fa-user-plus"></i></span>Add Employee</a></li>
-		
-			<li class="nav-item"><a href="{{ url_for('homepage') }}"><span class="nav-icon"><i class="fa fa-sign-out"></i></span>Sign out</a></li>
+            {% if session.id %}
+                {% set id = session.id %}
+			    <li class="nav-item"><a href= "{{url_for('employeelistuser',id=id)}}"><span class="nav-icon"><i class="fa fa-users"></i></span>Employee Profile</a></li>
+                <li class="nav-item"><a href= "{{url_for('tasks')}}"><span class="nav-icon"><i class="fa fa-users"></i></span>Tasks</a></li>
+			    <li class="nav-item"><a href= "{{url_for('signout')}}"><span class="nav-icon"><i class="fa fa-sign-out"></i></span>Sign out</a></li>
+            {%endif%}
 		</ul>
 	</section>
-	<section class="contentSection right clearfix">
-		<div class="displaySuccess"></div>
-		<div class="container">
-			<div class="wrapper add_employee clearfix">
-				<div class="section_title">Add Employee</div>
-				<form id="addemployee" class="clearfix" method="POST" action="/addemployee">
-					<div class="section_subtitle">Personal Data</div>
-					<div class="input-box input-small left">
-						<label for="employee_id">Employee ID</label><br>
-						<input type="text" class="inputField emp_id" placeholder="Optional" name="employee_id" value="">
-						<div class="error empiderror"></div>
-					</div>
-					<div class="input-box input-small left">
-						<label for="firstname">Name</label><br>
-						<input type="text" class="inputField firstname" name="name">
-						<div class="error firstnameerror"></div>
-					</div>
-					<div class="input-box input-small left">
-						<label for="phone">Phone number</label><br>
-						<input type="text" class="inputField phone" name="phone">
-						<div class="error phoneerror"></div>
-					</div>
-					<div class="input-box input-small left">
-						<label for="jobtype">Job Designation</label><br>
-						<input type="text" class="inputField jobtype" name="job">
-						<div class="error jobtypeerror"></div>
-					</div>
-					<div class="input-box input-small left">
-						<label for="dateemployed">Date employed</label><br>
-						<input type="text" id="datepicker" class="inputField dateemployed" name="dateemployed">
-						<div class="error dateemployederror"></div>
-					</div>
-					<div class="input-box input-small left">
-						<label for="resaddress">Residential Address</label><br>
-						<input type="text" class="inputField resaddress" name="resaddress">
-						<div class="error resaddresserror"></div>
-					</div>
-					<div class="input-box input-small left">
-						<label for="reslocation">Job Location</label><br>
-						<input type="text" class="inputField reslocation" name="reslocation">
-						<div class="error reslocationerror"></div>
-					</div>	
-					</div>
-					<div class="input-box">
-						<button type="submit" class="submitField">Add record</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</section>
-</body>
+    </body>
 <style>
 
 body {
@@ -689,3 +639,6 @@ span.delbtn.nobtn {
 	
 </style>
 </html>
+{% block body%}
+
+{%endblock%}

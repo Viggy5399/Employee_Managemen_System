@@ -1,13 +1,20 @@
 from argparse import Action
-from flask import Flask, render_template, request, redirect,url_for,jsonify,make_response,flash
+from flask import Flask, render_template, request, redirect,url_for,jsonify,make_response,flash,session
 from flask_pymongo import PyMongo
+from flask_bcrypt import Bcrypt
+from flask_session import Session
+import random
 
 app = Flask(__name__)
 app.config['MONGO_URI'] = "mongodb://localhost:27017/Employee_Management_System"
-app.config['SECRET KEY'] = "9943799660"
-
+app.config['SECRET_KEY'] = '@#$%^&*('
 mongo = PyMongo(app)
+bcrypt = Bcrypt(app)
+app.config["SESSION_PERMANENT"] = False
 
+app.config["SESSION_TYPE"] = "filesystem"
+sessionv = Session(app)
+app.secret_key = "ems"
 
 
 db = mongo.db.registered_users
@@ -23,20 +30,38 @@ def homepage():
 @app.route("/login", methods =["POST","GET"])
 def login():
     if request.method == "POST":
-        user = db.registered_users.find_one({"Employee_id":request.form.get("id")})
-        Name = request.form.get("name")
-        if user and (request.form.get("password")==user["Password"]):
-            return redirect(url_for('addemployee'))
+        # user = db.registered_users.find_one({"Employee_id":request.form.get("id")})
+        # Name = request.form.get("name")
+        password = request.form.get("password")
+        id = request.form.get("id")
+        res = db.registered_users.find({"Employee_id":request.form.get("id")},{"Password":1})
+        l = list(res)
+
+
+
+        if len(l) != 0 and bcrypt.check_password_hash(l[0]["Password"],password):
+            session["id"] = id
+            return redirect(url_for('employeelistuser', id=id))
         else:
             return make_response(jsonify({'error': 'Unauthorized access'}), 403)
         
     return render_template("login.html")
 
-@app.route("/adminlogin")
+@app.route('/employeelistuser/<id>', methods =["POST","GET"] )
+def employeelistuser(id):
+    headings =("NAME","ID","Phone_number","Job_designation","Date_of_joining","Address","Job_Location")
+    allusers=[]
+    for i in db1.addemployee.find({},{'_id':0}):
+        allusers.append(list(i.values()))
+    print(allusers)
+    return render_template ("employeelistuser.html",id=id,headings=headings,data=allusers)
+
+
+@app.route("/adminlogin", methods =["GET","POST"])
 def adminlogin():
     if request.method == "POST":
-        Name = request.form.get("name")
-        if Name == "admin":
+        ID = request.form.get("id")
+        if ID == "Admin":
             return redirect(url_for('employeelist'))
         else:
             return make_response(jsonify({'error': 'Unauthorized access'}), 403)
@@ -51,7 +76,12 @@ def register():
        Employee_name = request.form["name"]
        Employee_id = request.form["id"]
        Password = request.form["password"]
-       db.registered_users.insert_one({"Employee_name" : Employee_name,"Employee_id":Employee_id,"Password":Password})
+       haspassword=bcrypt.generate_password_hash(Password)
+       
+       db.registered_users.insert_one({"Employee_name" : Employee_name,"Employee_id":Employee_id,"Password":haspassword})
+       flash(f'User is succesfully created','success')
+
+
        return redirect(url_for('homepage'))
     return render_template("register1.html")
 
@@ -124,11 +154,41 @@ def forgotpassword():
         idcheck =db.registered_users.find_one({"Employee_id":ID})
         print (idcheck)
         phonecheck =db1.addemployee.find({'Phone_number':Phone})
+        print(phonecheck)
         if idcheck and phonecheck :
-            password = idcheck["Password"]
-            return render_template("showpassword.html",passw=password)  
+            return redirect(url_for("showpassword",id=ID))  
 
-    return render_template("forgotpassword.html")  
+    return render_template("forgotpassword.html") 
+
+@app.route("/showpassword/<id>",methods=["GET","POST"]) 
+def showpassword(id):
+    if request.method=="POST":
+        password = request.form.get("newpassword")
+        print(password)
+        repassword = request.form.get("confirmpassword")
+        if (password==repassword):
+            haspassword=bcrypt.generate_password_hash(password)
+            db.registered_users.update_one({"Employee_id": id},{"$set":{'Password':haspassword}})
+            return redirect(url_for("homepage"))
+
+    return render_template("showpassword.html")
+
+@app.route("/tasks", methods=["GET","POST"])
+def tasks():
+    Heading = ["Completed tasks","Tasks Yet to complete","Timeline"]
+    task1=["Python Flask","Java", "DBMS","Operating System"]
+    task2=["Mongo DB","SQL","Angular","Networking"]
+    timeline=["Monday","Tuesday","Wednesday","Thursday"]
+    return render_template("Tasks.html",headings=Heading,task1=task1,task2=task2,timeline=timeline)
+
+@app.route("/signout", methods=["GET","POST"])
+def signout():
+    if request.method=="POST":
+        session[id]=None
+        
+    return render_template("homepage.html")
+
+
     
 
 if __name__ == "__main__":

@@ -8,12 +8,8 @@
 		<ul class="nav">
 			<li class="nav-item"><a href="{{url_for('employeelist')}}"><span class="nav-icon"><i class="fa fa-users"></i></span>All Employees</a></li>
 			<li class="nav-item"><a href="{{url_for('update_id')}}"><span class="nav-icon"><i class="fa fa-check"></i></span>Update Employess</a></li>
-			<li class="nav-item"><a href=""><span class="nav-icon"><i class="fa fa-times"></i></span>Delete Employees</a></li>
-			
 			<li class="nav-item current"><a href="{{ url_for('addemployee') }}"><span class="nav-icon"><i class="fa fa-user-plus"></i></span>Add Employee</a></li>
-		
-			<li class="nav-item"><a href=""><span class="nav-icon"><i class="fa fa-cog"></i></span>Settings</a></li>
-			<li class="nav-item"><a href="{{ url_for('homepage') }}"><span class="nav-icon"><i class="fa fa-sign-out"></i></span>Sign out</a></li>
+			<li class="nav-item"><a href= "{{url_for('signout')}}"><span class="nav-icon"><i class="fa fa-sign-out"></i></span>Sign out</a></li>
 		</ul>
 	</section>
     </body>

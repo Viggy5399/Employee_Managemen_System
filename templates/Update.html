@@ -1,19 +1,63 @@
+{%extends 'base.html'%}
+{% block body%}
 <html>
     <head></head>
+    <style>
+      .input-box{
+        width: 100%;
+          height: 79px;
+        margin-bottom: 15px;
+      }
+      .input-small{
+          width: 90%;
+      }
+      .left{
+          float: left;
+      }
+      .form{
+        margin: 2rem auto;
+        background-color: rgb(25, 95, 149);
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .form input{
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+        border: 1px solid white;
+        border-radius: 5px;
+      }
+      .form label{
+        color: aliceblue;
+        margin-bottom: 0.2rem;
+      }
+      input[type="submit"]{
+        background-color: rgb(151, 178, 213);
+        border: 1px solid white;
+      }
+  </style>
     <body>
       {% for emp in emps %}
-      <h1>"Viggy"</h1>
-        <form method = "POST" >
-          <p>Employee_name <input type = "text" name = "name"  value="{{ emp["Employee_name" ]}}"></p>
-          <p>Employee_id <input type = "text" name = "employee_id"  value="{{ emp["Employee_id" ]}}"></p>
-          <p>Phone_number <input type = "text" name = "phone" value="{{ emp["Phone_Number"]}}"></p>
-          <p>Designation <input type = "text" name = "job" value="{{ emp["Designation"]}}"></p>
-          <p>Date_of_Joining <input type = "text" name = "dateemployed" value="{{ emp["Date_of_Joining"]}}"></p>
-          <p>Address <input type = "text" name = "resaddress" value="{{ emp["Address"]}}"></p>
-          <p>Location <input type = "text" name = "reslocation" value="{{ emp["Location"]}}"></p>
-          <p><input type = "submit" value = "Submit" ></p>
+        <form method = "POST" id="f2" class="form">
+          <label for="{{ emp["Employee_name" ]}}">Employee_name</label> 
+          <input type = "text" name = "name" id="{{ emp["Employee_name" ]}}"  value="{{ emp["Employee_name" ]}}">
+          <label for="{{ emp["Employee_id" ]}}">Employee_id</label> 
+          <input type = "text" name = "employee_id" id="{{ emp["Employee_id" ]}}" value="{{ emp["Employee_id" ]}}">
+          <label for="{{ emp["Phone_Number"]}}">Phone_number</label> 
+          <input type = "text" id="{{ emp["Phone_Number"]}}" name = "phone" value="{{ emp["Phone_Number"]}}">
+          <label for="{{ emp["Designation"]}}">Designation</label> 
+          <input type = "text" name = "job" id="{{ emp["Designation"]}}" value="{{ emp["Designation"]}}">
+          <label for="{{ emp["Date_of_Joining"]}}">Date_of_Joining</label> 
+          <input type = "text" name = "dateemployed" id="{{ emp["Date_of_Joining"]}}" value="{{ emp["Date_of_Joining"]}}">
+          <label for="{{ emp["Address"]}}">Address</label> 
+          <input type = "text" name = "resaddress" id="{{ emp["Address"]}}" value="{{ emp["Address"]}}">
+          <label for="{{ emp["Location"]}}">Location</label> 
+          <input type = "text" name = "reslocation" id="{{ emp["Location"]}}" value="{{ emp["Location"]}}">
+          <input type = "submit" id="submit-btn" value = "Submit" >
         </form>
         {% endfor %}
     </body>
 </html>
+{%endblock%}
 

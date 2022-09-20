@@ -121,32 +121,7 @@ input[type="submit"]:hover{
 
   </head>
   <body>
-    <div class="center">
-      <h1>Register</h1>
-      <form method="POST", action="/register">
-        <div class="txt_field">
-          <input type="text" required name="name">
-          <span></span>
-          <label>Name</label>
-        </div>
-        <div class="txt_field">
-            <input type="text" required name="id">
-            <span></span>
-            <label>Userid</label>
-          </div>
-        <div class="txt_field">
-          <input type="password" required name="password">
-          <span></span>
-          <label>Password</label>
-        </div>
-        <div class="txt_field">
-            <input type="password" required name="confirmpassword">
-            <span></span>
-            <label>Confirm Password</label>
-          </div>
-        <input type="submit" value="REGISTER">
-        <div class="signup_link">
-          {% with messages = get_flashed_messages(with_categories=true) %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
 
         {% if messages %}
 
@@ -163,6 +138,32 @@ input[type="submit"]:hover{
         {% endif %}
 
     {% endwith %}
+    <div class="center">
+      <h1>Register</h1>
+      <form method="POST", action="/register">
+        <div class="txt_field">
+          <input type="text" required name="name">
+          <span></span>
+          <label>Name</label>
+        </div>
+        <div class="txt_field">
+            <input type="text" required name="id">
+            <span></span>
+            <label>Userid</label>
+          </div>
+        <div class="txt_field">
+          <input type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}" required name="password">
+          <span></span>
+          <label>Password</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,12}" required name="confirmpassword">
+            <span></span>
+            <label>Confirm Password</label>
+          </div>
+        <input type="submit" value="REGISTER">
+        <div class="signup_link">
+          
         </div>
       </form>
     </div>

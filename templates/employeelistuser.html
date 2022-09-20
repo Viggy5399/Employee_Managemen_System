@@ -1,3 +1,5 @@
+{%extends 'baseemployee.html' %}
+{% block body%}
 <!DOCTYPE html>
 <html>
 
@@ -5,6 +7,7 @@
 </head>
 
 <body>
+  <div class="all123">
   <table border="5" style="width: 100%;" bgcolor="aqua">
     <tr>
       {% for header in headings%}
@@ -12,22 +15,58 @@
       {%endfor%}
     </tr>
     {% for row in data %}
-      {% set value = row[1] %}
+      {% if id == row[1] %}
       <tr>
         {% for cell in row %}
       
           <td>{{ cell }}</td>
       
         {% endfor %}
-        <td><button><a href = {{ url_for('update' ,id=value) }}>Edit</a></button></td>
-        <td><button><a href = {{ url_for('delete' ,id=value) }}>Delete</a></button></td>
+      {% endif %}
+        <!-- <td><button><a href = {{ url_for('update' ,id=value) }}>Edit</a></button></td> -->
+        <!-- <td><button><a href = {{ url_for('delete' ,id=value) }}>Delete</a></button></td> -->
       </tr>
 
     {% endfor %}
 
 
   </table>
+  </div>
 
 </body>
+<style>
+  .all123{
 
+    display: flex;
+    float: right;
+    width: 84%;
+  }
+table{
+  
+  border-collapse: collapse;
+  table-layout: auto;
+  width: 100%;
+  background-color: rgb(21, 62, 100);
+  color: white;
+  box-shadow: 1em 1em 1em rgb(108, 76, 108);
+  font-family: cursive;
+  
+}
+th,td{
+  padding: 1em;
+ 
+}
+span{
+  color: wheat;
+}
+table,th,td{
+  border:2px solid rgb(96, 44, 44);
+}
+span:hover{
+  size: 1em;
+  
+}
+
+</style>
 </html>
+{%endblock%}
